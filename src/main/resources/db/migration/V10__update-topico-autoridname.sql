@@ -1,0 +1,1 @@
+ALTER TABLE topico CHANGE autor autor_id int;

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Topicos</title>
+
+</head>
+<body>
+<h1 th:text="'Hola ' + ${nombre} + '!'"></h1>
+
+<!-- Formulario para registrar un nuevo tópico -->
+<form id="nuevoTopicoForm" th:action="@{/topicos/nuevo}" method="post">
+    <input type="hidden" name="token" th:value="${token}"/>
+    <input type="hidden" name="correoElectronico" th:value="${correoElectronico}"/>
+
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required/><br/>
+
+    <label for="mensaje">Mensaje:</label>
+    <textarea id="mensaje" name="mensaje" required></textarea><br/>
+
+    <label for="nombreCurso">Nombre del Curso:</label>
+    <input type="text" id="nombreCurso" name="nombreCurso" required/><br/>
+
+    <label for="categoria">Categoría:</label>
+    <select id="categoria" name="categoria" required>
+        <option value="PROGRAMACION">PROGRAMACION</option>
+        <option value="FRONT_END">FRONT_END</option>
+        <option value="DATA_SCIENCE">DATA_SCIENCE</option>
+        <option value="INNOVACION_Y_GESTION">INNOVACION_Y_GESTION</option>
+        <option value="DEVOPS">DEVOPS</option>
+        <option value="OFF_TOPIC">OFF_TOPIC</option>
+    </select><br/>
+
+    <button type="submit">Registrar</button>
+</form>
+
+<!-- Tabla para mostrar tópicos -->
+<table border="1" id="topicosTable">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Message</th>
+        <th>Creation Date</th>
+        <th>Status</th>
+        <th>Author</th>
+        <th>Course Name</th>
+        <th>Course Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterando sobre la lista de tópicos y mostrando la información en filas -->
+    <tr th:each="topico : ${topicos}">
+        <td>
+            <!-- Enlace para navegar a la página de detalles del tópico -->
+            <a th:href="@{'/topicos/' + ${topico[7]} + '?token=' + ${token} + '&correoElectronico=' + ${correoElectronico}}">
+                <span th:text="${topico[0]}"></span> <!-- Título del tópico -->
+            </a>
+        </td>
+        <td th:text="${topico[1]}"></td> <!-- Mensaje del tópico -->
+        <td th:text="${topico[2]}"></td> <!-- Fecha de creación del tópico -->
+        <td th:text="${topico[3]}"></td> <!-- Estado del tópico -->
+        <td th:text="${topico[4]}"></td> <!-- Nombre del autor del tópico -->
+        <td th:text="${topico[5]}"></td> <!-- Nombre del curso del tópico -->
+        <td th:text="${topico[6]}"></td> <!-- Categoría del curso del tópico -->
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/topicos/logout}" >Log off</a>
+
+
+</body>
+</html>
