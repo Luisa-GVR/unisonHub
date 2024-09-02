@@ -2,21 +2,86 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Bebas Neue', sans-serif;
+            background-color: #122C34;
+        }
+        .login {
+            background-color: #8B1E3F;
+            padding: 3rem; /* Cambiado a rem para mejor adaptabilidad */
+            border-radius: 1rem; /* Cambiado a rem para mejor adaptabilidad */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 30rem; /* Cambiado a rem para mejor adaptabilidad */
+            max-width: 90%; /* Asegura que el contenedor no sea demasiado ancho en pantallas pequeñas */
+            box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+	    font-size: 1.2em;
+
+        }
+        h1 {
+            margin-bottom: 2rem; /* Espacio debajo del título */
+            font-size: 3rem; /* Tamaño del texto del título */
+            text-align: center; /* Centra el texto */
+        }
+	h2{
+            margin-bottom: 2rem; /* Espacio debajo del título */
+            font-size: 2rem; /* Tamaño del texto del título */
+            text-align: center; /* Centra el texto */
+        }
+        label {
+            display: block; /* Asegura que cada etiqueta ocupe una línea completa */
+            margin-bottom: 0.5rem; /* Espacio debajo de la etiqueta */
+            font-weight: bold; /* Resalta el texto de la etiqueta */
+        }
+        input[type="text"],
+        input[type="password"] {
+            display: block;
+            width: 100%;
+            padding: 1rem; /* Espacio interno en el campo de entrada */
+            margin-bottom: 1rem; /* Espacio debajo del campo de entrada */
+            border: 1px solid #ccc; /* Color del borde */
+            border-radius: 0.5rem; /* Esquinas redondeadas */
+            box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+        }
+        button {
+            display: grid;
+            width: 100%;
+            padding: 1rem;
+	    margin-top: 1.5rem;
+	    margin-bottom: 1rem;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #0056b3; /* Color del botón al pasar el mouse */
+        }
+	    </style>
 </head>
 <body>
-<h1>Login</h1>
-<form th:action="@{/login}" method="post">
-    <div>
-        <label for="correoElectronico">Correo:</label>
+<div class="login">
+    <h1>I n f o n e t - I S I </h1>
+    <h2>LOGIN</h2>
+    <form th:action="@{/login}" method="post">
+        <label for="correoElectronico">EMAIL:</label>
         <input type="text" id="correoElectronico" name="correoElectronico" />
-    </div>
-    <div>
-        <label for="contrasena">Password:</label>
+        <label for="contrasena">PASSWORD:</label>
         <input type="password" id="contrasena" name="contrasena" />
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-</form>
+        <div><button type="submit">LOGIN</button></div>
+        <div><button type="submit">REGISTER</button></div>
+
+
+
+    </form>
+</div>
 </body>
 </html>
