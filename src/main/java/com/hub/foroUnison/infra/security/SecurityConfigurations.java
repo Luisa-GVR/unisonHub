@@ -31,7 +31,11 @@ public class SecurityConfigurations {
                 .and()
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers("/login").permitAll()  // Permitir GET y POST a /login
+                .requestMatchers(HttpMethod.GET, "/login").permitAll() // Permitir GET a /login
+                .requestMatchers(HttpMethod.GET, "/register").permitAll() // Permitir POST a /register
+                .requestMatchers(HttpMethod.POST, "/register").permitAll() // Permitir POST a /register
+                .requestMatchers(HttpMethod.GET, "/register/validation").permitAll() // Permitir GET a /register/validation
+                .requestMatchers(HttpMethod.POST, "/register/validation").permitAll() // Permitir POST a /register/validation
                 .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -41,6 +45,7 @@ public class SecurityConfigurations {
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
 
     private AuthenticationEntryPoint authenticationEntryPoint() {
         return (request, response, authException) -> response.sendRedirect("/login");

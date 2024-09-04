@@ -30,6 +30,13 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+        // Ignorar rutas específicas
+        if (request.getRequestURI().startsWith("/register")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         // Obtener el token de los parameter
         var tokenParameter = request.getParameter("token");
 
