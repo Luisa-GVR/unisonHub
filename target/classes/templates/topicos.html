@@ -3,72 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <title>Topicos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: block;
+            margin: 0;
+            font-family: 'Bebas Neue', sans-serif;
+	    background: radial-gradient(circle, #535D61, #212227);
+            padding-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
 
+        label {
+            display: inline;
+            padding: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            background-color: #427AA1;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem; /* Tamaño del texto del título */
+            text-align: left; /* Centra el texto */
+    	    padding-left: 1rem;
+        }
+	h2 {
+            font-size: 1.5rem; /* Tamaño del texto del título */
+        }
+
+
+        .text {
+            padding-bottom: 2rem; /* Cambiado a rem para mejor adaptabilidad */
+            margin-left: 1rem;
+            width: 50rem; /* Cambiado a rem para mejor adaptabilidad */
+            max-width: 90%; /* Asegura que el contenedor no sea demasiado ancho en pantallas pequeñas */
+            box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+            font-size: 1.2em;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1.3rem;
+        }
+
+        .form-group label {
+            width: 20%;
+            margin: 0 1rem 0 0;
+            color: white;
+        }
+
+        .form-group input,
+        .form-group select {
+            flex-grow: 1;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            border: none;
+        }
+
+        .form-group select {
+            width: 100%;
+        }
+
+        #mensaje {
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Asegura que no haya espacio entre celdas */
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border: none; /* Elimina cualquier borde alrededor de las celdas */
+        }
+
+        button {
+            display: grid;
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            background-color: #427AA1;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+	    font-family: 'Bebas Neue', sans-serif;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Color del botón al pasar el mouse */
+        }
+.table-container {
+    width: 100%; /* Ajusta el ancho del contenedor */
+    max-width: 800px; /* Máximo ancho de la tabla */
+    height: 20rem; /* Altura fija del contenedor */
+    overflow: auto; /* Habilita la barra de desplazamiento si es necesario */
+    border: 1px solid #ddd; /* Borde alrededor del contenedor */
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+}
+
+#topicosTable {
+    width: 100%; /* La tabla ocupa el ancho completo del contenedor */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+}
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #427AA1;
+    color: white;
+    text-align: left;
+    z-index: 1000; /* Asegura que el header esté por encima del contenido */
+    font-size: 3rem;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.content {
+    margin-top: 10rem; /* Asegura que el contenido no quede debajo del header */
+    padding: 1rem;
+
+}
+
+
+    </style>
 </head>
 <body>
-<h1 th:text="'Hola ' + ${nombre} + '!'"></h1>
+<header class="header">
+    <h1>I n f o n e t - I S I</h1>
+    <h2 style="padding-left: 1rem"; th:text="'Bienvenido ' + ${nombre} + '!'"></h2>
+</header>
+<div class = "content">
+    <!-- Formulario para registrar un nuevo tópico -->
+    <form id="nuevoTopicoForm" th:action="@{/topicos/nuevo}" method="post">
+        <input type="hidden" name="token" th:value="${token}"/>
+        <input type="hidden" name="correoElectronico" th:value="${correoElectronico}"/>
 
-<!-- Formulario para registrar un nuevo tópico -->
-<form id="nuevoTopicoForm" th:action="@{/topicos/nuevo}" method="post">
-    <input type="hidden" name="token" th:value="${token}"/>
-    <input type="hidden" name="correoElectronico" th:value="${correoElectronico}"/>
+        <table style="width: 90%;">
+            <tr>
+                <td>
 
-    <label for="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" required/><br/>
+                    <div class="text">
+                        <div class="form-group">
+                            <label for="titulo">Título:</label>
+                            <input type="text" id="titulo" name="titulo" required/>
 
-    <label for="mensaje">Mensaje:</label>
-    <textarea id="mensaje" name="mensaje" required></textarea><br/>
+                            <label for="nombreCurso">Nombre del Curso:</label>
+                            <input type="text" id="nombreCurso" name="nombreCurso" required/>
+                        </div>
 
-    <label for="nombreCurso">Nombre del Curso:</label>
-    <input type="text" id="nombreCurso" name="nombreCurso" required/><br/>
+                        <div class="form-group">
+                            <label for="categoria">Categoría:</label>
+                            <select id="categoria" name="categoria" required>
+                                <option value="PROGRAMACION">PROGRAMACION</option>
+                                <option value="FRONT_END">FRONT_END</option>
+                                <option value="DATA_SCIENCE">DATA_SCIENCE</option>
+                                <option value="INNOVACION_Y_GESTION">INNOVACION_Y_GESTION</option>
+                                <option value="DEVOPS">DEVOPS</option>
+                                <option value="OFF_TOPIC">OFF_TOPIC</option>
+                            </select>
+                        </div>
 
-    <label for="categoria">Categoría:</label>
-    <select id="categoria" name="categoria" required>
-        <option value="PROGRAMACION">PROGRAMACION</option>
-        <option value="FRONT_END">FRONT_END</option>
-        <option value="DATA_SCIENCE">DATA_SCIENCE</option>
-        <option value="INNOVACION_Y_GESTION">INNOVACION_Y_GESTION</option>
-        <option value="DEVOPS">DEVOPS</option>
-        <option value="OFF_TOPIC">OFF_TOPIC</option>
-    </select><br/>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje:</label>
+                            <textarea id="mensaje" name="mensaje" required style="width: 40rem; height: 10rem;"></textarea><br/>
+                        </div>
 
-    <button type="submit">Registrar</button>
-</form>
+                        <button type="submit">Registrar</button>
+                    </div>
+                </td>
 
-<!-- Tabla para mostrar tópicos -->
-<table border="1" id="topicosTable">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Message</th>
-        <th>Creation Date</th>
-        <th>Status</th>
-        <th>Author</th>
-        <th>Course Name</th>
-        <th>Course Category</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Iterando sobre la lista de tópicos y mostrando la información en filas -->
-    <tr th:each="topico : ${topicos}">
-        <td>
-            <!-- Enlace para navegar a la página de detalles del tópico -->
-            <a th:href="@{'/topicos/' + ${topico[7]} + '?token=' + ${token} + '&correoElectronico=' + ${correoElectronico}}">
-                <span th:text="${topico[0]}"></span> <!-- Título del tópico -->
-            </a>
-        </td>
-        <td th:text="${topico[1]}"></td> <!-- Mensaje del tópico -->
-        <td th:text="${topico[2]}"></td> <!-- Fecha de creación del tópico -->
-        <td th:text="${topico[3]}"></td> <!-- Estado del tópico -->
-        <td th:text="${topico[4]}"></td> <!-- Nombre del autor del tópico -->
-        <td th:text="${topico[5]}"></td> <!-- Nombre del curso del tópico -->
-        <td th:text="${topico[6]}"></td> <!-- Categoría del curso del tópico -->
-    </tr>
-    </tbody>
-</table>
+                <td>
+                    <h2 style="text-align: center;">Topicos</h2>
+                    <!-- Tabla para mostrar tópicos -->
+                    <div class ="table-container">
+                        <table border="1" id="topicosTable">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Creation Date</th>
+                                <th>Status</th>
+                                <th>Author</th>
+                                <th>Course Name</th>
+                                <th>Course Category</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Iterando sobre la lista de tópicos y mostrando la información en filas -->
+                            <tr th:each="topico : ${topicos}">
+                                <td>
+                                    <!-- Enlace para navegar a la página de detalles del tópico -->
+                                    <a th:href="@{'/topicos/' + ${topico[7]} + '?token=' + ${token} + '&correoElectronico=' + ${correoElectronico}}">
+                                        <span th:text="${topico[0]}"></span> <!-- Título del tópico -->
+                                    </a>
+                                </td>
+                                <td th:text="${topico[1]}"></td> <!-- Mensaje del tópico -->
+                                <td th:text="${topico[2]}"></td> <!-- Fecha de creación del tópico -->
+                                <td th:text="${topico[3]}"></td> <!-- Estado del tópico -->
+                                <td th:text="${topico[4]}"></td> <!-- Nombre del autor del tópico -->
+                                <td th:text="${topico[5]}"></td> <!-- Nombre del curso del tópico -->
+                                <td th:text="${topico[6]}"></td> <!-- Categoría del curso del tópico -->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a th:href="@{/topicos/logout}">Log off</a>
 
-<a th:href="@{/topicos/logout}" >Log off</a>
-
-
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>
+
