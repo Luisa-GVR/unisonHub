@@ -4,73 +4,102 @@
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Bebas Neue', sans-serif;
-	    background: radial-gradient(circle, #535D61, #212227);
-            /*background-color: #212227;*/
-        }
-        .login {
-            background-color: #637074;
-            padding: 3rem; /* Cambiado a rem para mejor adaptabilidad */
-            border-radius: 1rem; /* Cambiado a rem para mejor adaptabilidad */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 30rem; /* Cambiado a rem para mejor adaptabilidad */
-            max-width: 90%; /* Asegura que el contenedor no sea demasiado ancho en pantallas pequeñas */
-            box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
-	    font-size: 1.2em;
+    body {
+        align-items: center;
+        background: white;
+        display: flex;
+        font-family: 'Bebas Neue', sans-serif;
+        height: 100vh;
+        justify-content: center;
+        margin: 0;
+    }
 
-        }
-        h1 {
-            margin-bottom: 2rem; /* Espacio debajo del título */
-            font-size: 3rem; /* Tamaño del texto del título */
-            text-align: center; /* Centra el texto */
-        }
-	h2{
-            margin-bottom: 2rem; /* Espacio debajo del título */
-            font-size: 2rem; /* Tamaño del texto del título */
-            text-align: center; /* Centra el texto */
-        }
-        label {
-            display: block; /* Asegura que cada etiqueta ocupe una línea completa */
-            margin-bottom: 0.5rem; /* Espacio debajo de la etiqueta */
-            font-weight: bold; /* Resalta el texto de la etiqueta */
-        }
-        input[type="text"],
-        input[type="password"] {
-            display: block;
-            width: 100%;
-            padding: 1rem; /* Espacio interno en el campo de entrada */
-            margin-bottom: 1rem; /* Espacio debajo del campo de entrada */
-            border: 1px solid #ccc; /* Color del borde */
-            border-radius: 0.5rem; /* Esquinas redondeadas */
-            box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
-        }
-        button {
-            display: grid;
-            width: 100%;
-            padding: 1rem;
-	    margin-top: 1.5rem;
-	    margin-bottom: 1rem;
-            border: none;
-            background-color: #427AA1;
-            color: white;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        button:hover {
-            background-color: #0056b3; /* Color del botón al pasar el mouse */
-        }
-	    </style>
+    body.dark-mode {
+        background: #202124;
+    }
+
+    body.dark-mode h1 {
+        color: white;
+    }
+
+    body.dark-mode h2 {
+        color: white;
+    }
+
+    body.dark-mode label {
+        color: white;
+    }
+
+    body.dark-mode .login {
+        background-color: #303134;
+    }
+
+    button {
+        background-color: #4381C1;
+        border: none;
+        border-radius: 0.5rem;
+        color: white;
+        cursor: pointer;
+        display: grid;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: #3A597B;
+    }
+
+    h1 {
+        color: black;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    h2 {
+        color: black;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .login {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        font-size: 1.2em;
+        max-width: 90%;
+        padding: 3rem;
+        width: 30rem;
+    }
+</style>
+
 </head>
 <body>
 <div class="login">
     <h1>I n f o n e t - I S I </h1>
+
     <h2>LOGIN</h2>
     <form th:action="@{/login}" method="post">
         <label for="correoElectronico">EMAIL:</label>
@@ -84,5 +113,34 @@
 
     </form>
 </div>
+
 </body>
+<script type="text/javascript" src="./js/jquery-3.7.1.min.js"></script>
+
+<script type="text/javascript">
+    // Detectar si el usuario tiene preferencia por el modo oscuro en el sistema
+const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Obtener la preferencia del modo del usuario de localStorage
+let currentMode = localStorage.getItem('theme');
+
+// Si el usuario ya tiene una preferencia, usarla
+if (currentMode === 'dark' || (!currentMode && userPrefersDark)) {
+    document.body.classList.add('dark-mode');
+}
+
+// Cambiar de modo al hacer clic en el botón
+document.getElementById('toggle-button').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    // Guardar la preferencia del usuario en localStorage
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+
+</script>
 </html>

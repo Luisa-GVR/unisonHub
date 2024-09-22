@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalles del topico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         /* Simple CSS for the modal */
         .modal {
@@ -37,6 +38,154 @@
             text-decoration: none;
             cursor: pointer;
         }
+        body {
+            display: block;
+            margin: 0;
+            font-family: 'Bebas Neue', sans-serif;
+	    background: radial-gradient(circle, #535D61, #212227);
+            padding-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        label {
+            display: inline;
+            padding: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            background-color: #427AA1;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+        p {
+            display: inline;
+            padding: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            background-color: white;
+            color: black;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+
+        h1 {
+            font-size: 3rem; /* Tamaño del texto del título */
+            text-align: left;
+    	    padding-left: 1rem;
+        }
+	h2 {
+            font-size: 1.5rem; /* Tamaño del texto del título */
+        }
+
+
+        .text {
+            padding-bottom: 2rem; /* Cambiado a rem para mejor adaptabilidad */
+            margin-left: 1rem;
+            width: 70rem; /* Cambiado a rem para mejor adaptabilidad */
+            max-width: 90%; /* Asegura que el contenedor no sea demasiado ancho en pantallas pequeñas */
+            box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+            font-size: 1.2em;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1.3rem;
+        }
+
+        .form-group label {
+            width: 20%;
+            margin: 0 1rem 0 0;
+            color: white;
+        }
+
+        .form-group input,
+        .form-group select {
+            flex-grow: 1;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            border: none;
+        }
+
+        .form-group select {
+            width: 100%;
+        }
+
+        #mensaje {
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Asegura que no haya espacio entre celdas */
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border: none; /* Elimina cualquier borde alrededor de las celdas */
+        }
+
+        button {
+            display: grid;
+            width: 10%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            background-color: #427AA1;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+	    font-family: 'Bebas Neue', sans-serif;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Color del botón al pasar el mouse */
+        }
+.table-container {
+    width: 100%; /* Ajusta el ancho del contenedor */
+    max-width: 800px; /* Máximo ancho de la tabla */
+    height: 20rem; /* Altura fija del contenedor */
+    overflow: auto; /* Habilita la barra de desplazamiento si es necesario */
+    border: 1px solid #ddd; /* Borde alrededor del contenedor */
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+}
+
+#topicosTable {
+    width: 100%; /* La tabla ocupa el ancho completo del contenedor */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+}
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #427AA1;
+    color: white;
+    text-align: left;
+    z-index: 1000; /* Asegura que el header esté por encima del contenido */
+    font-size: 3rem;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.content {
+    margin-top: 5rem; /* Asegura que el contenido no quede debajo del header */
+    padding: 0.5rem;
+
+}
+
     </style>
 
     <script th:inline="javascript">
@@ -50,16 +199,29 @@
     </script>
 </head>
 <body>
-<h1>Detalles del topico</h1>
+<header class="header">
+    <h1>I n f o n e t - I S I</h1>
+</header>
 
-<div>
-    <p><strong>Titulo:</strong> <span th:text="${topico.titulo}"></span></p>
-    <p><strong>Mensaje:</strong> <span th:text="${topico.mensaje}"></span></p>
-    <p><strong>Fecha de creacion:</strong> <span th:text="${topico.fechaCreacion}"></span></p>
-    <p><strong>Status:</strong> <span th:text="${topico.status}"></span></p>
-    <p><strong>Autor:</strong> <span th:text="${topico.autor.nombre}"></span></p>
-    <p><strong>Nombre del curso:</strong> <span th:text="${topico.curso.nombre}"></span></p>
-    <p><strong>Categoria del curso:</strong> <span th:text="${topico.curso.categoria}"></span></p>
+
+<div class="content">
+    <h1>Detalles del topico</h1>
+    <div class="text">
+    <div class="form-group">
+    <label>Titulo: </label><p th:text="${topico.titulo}"></p>
+        <label>Autor: </label><p th:text="${topico.autor.nombre}"></p>
+        <label>Fecha de creacion: </label><p th:text="${topico.fechaCreacion}"></p>
+    </div>
+    <div class="form-group">
+        <label>Status: </label><p th:text="${topico.status}"></p>
+        <label>Nombre del curso: </label><p th:text="${topico.curso.nombre}"></p>
+    <label>Categoria del curso: </label><p th:text="${topico.curso.categoria}"></p>
+    </div>
+        <div class="form-group">
+
+        <label>Mensaje:</label><p th:text="${topico.mensaje}"></p>
+</div>
+    </div>
 </div>
 
 <button th:if="${topico.autor.correoElectronico == correoElectronico}"
@@ -183,4 +345,31 @@
 
 
 </body>
+<script type="text/javascript" src="./js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+    // Detectar si el usuario tiene preferencia por el modo oscuro en el sistema
+const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// Obtener la preferencia del modo del usuario de localStorage
+let currentMode = localStorage.getItem('theme');
+
+// Si el usuario ya tiene una preferencia, usarla
+if (currentMode === 'dark' || (!currentMode && userPrefersDark)) {
+    document.body.classList.add('dark-mode');
+}
+
+// Cambiar de modo al hacer clic en el botón
+document.getElementById('toggle-button').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    // Guardar la preferencia del usuario en localStorage
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+
+</script>
 </html>
