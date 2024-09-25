@@ -10,6 +10,7 @@ import com.hub.foroUnison.domain.topico.TopicoRepository;
 import com.hub.foroUnison.domain.usuario.Usuario;
 import com.hub.foroUnison.domain.usuario.UsuarioRepository;
 import com.hub.foroUnison.infra.security.TokenService;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -275,6 +276,7 @@ public class TopicosController {
 
     //Borrar un topico especifico
     @DeleteMapping("/{id}")
+    @Transactional
     public ModelAndView eliminarTopico(@PathVariable Long id,
                                        @RequestParam(name = "token", required = true) String token,
                                        @RequestParam(name = "correoElectronico", required = true) String correoElectronico) {
@@ -290,6 +292,8 @@ public class TopicosController {
             //usuario coincide
             Usuario autor = usuarioRepository.findUsuarioByCorreoElectronico(correoElectronico);
             if (topico.getAutor().equals(autor)) {
+
+                respuestaRepository.deleteByTopicoId(id);
 
                 topicoRepository.delete(topico);
                 return new ModelAndView("redirect:/topicos?token=" + token + "&correoElectronico=" + correoElectronico);

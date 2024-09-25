@@ -8,4 +8,7 @@ import java.util.List;
 @Repository
 public interface RespuestaRepository extends JpaRepository<Respuesta, Long> {
     List<Respuesta> findByTopico(Topico topico);
+
+    void deleteByTopicoId(Long topicoId);
+
 }
