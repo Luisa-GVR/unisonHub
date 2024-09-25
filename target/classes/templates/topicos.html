@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
   body {
-    background: white;
+    background: #F0F0F0;
     display: block;
     font-family: 'Bebas Neue', sans-serif;
     margin: 0;
@@ -39,7 +39,7 @@
   }
 
   body.dark-mode th {
-    color: white;
+    color: #F0F0F0;
   }
 
   body.dark-mode .custom-link {
@@ -55,7 +55,7 @@
     background-color: #427AA1;
     border: none;
     border-radius: 0.5rem;
-    color: white;
+    color: #F0F0F0;
     cursor: pointer;
     display: grid;
     font-family: 'Bebas Neue', sans-serif;
@@ -79,12 +79,15 @@
   h2 {
     font-size: 1.5rem;
   }
+  input {
+  border: 0.1rem solid black;
+    border-radius: 0.5rem;
+  }
 
   label {
     background-color: #427AA1;
-    border: none;
     border-radius: 0.5rem;
-    color: white;
+    color: #F0F0F0;
     cursor: pointer;
     display: inline;
     font-size: 1rem;
@@ -122,16 +125,18 @@
   }
 
   .form-group input,
-  .form-group select {
-    border: none;
+  .form-group select,
+  .form-group textarea{
+    border: 0.1rem solid black; /* Aplica un borde visible */
     border-radius: 0.5rem;
     flex-grow: 1;
     font-size: 1rem;
     padding: 0.5rem;
   }
 
+
   .form-group label {
-    color: white;
+    color: #F0F0F0;
     margin: 0 1rem 0 0;
     width: 20%;
   }
@@ -146,7 +151,7 @@
     left: 0;
     width: 100%;
     background-color: #427AA1;
-    color: white;
+    color: #F0F0F0;
     text-align: left;
     z-index: 1000; /* Asegura que el header esté por encima del contenido */
     font-size: 3rem;
@@ -161,7 +166,7 @@
     background-color: red;
     border: none;
     border-radius: 0.5rem;
-    color: white;
+    color: #F0F0F0;
     cursor: pointer;
     display: grid;
     font-family: 'Bebas Neue', sans-serif;
@@ -201,7 +206,9 @@
     max-width: 90%;
     padding-bottom: 2rem;
     width: 50rem;
+
   }
+
 </style>
 
 </head>

@@ -5,169 +5,220 @@
     <title>Detalles del topico</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        /* Simple CSS for the modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        body {
-            display: block;
-            margin: 0;
-            font-family: 'Bebas Neue', sans-serif;
-	    background: radial-gradient(circle, #535D61, #212227);
-            padding-bottom: 0.5rem;
-            padding-left: 1rem;
-        }
+    .btn-link {
+    text-decoration: none; /* Quita el subrayado */
+    }
 
-        label {
-            display: inline;
-            padding: 0.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            border: none;
-            background-color: #427AA1;
-            color: white;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-            text-align: center;
-        }
-        p {
-            display: inline;
-            padding: 0.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            border: none;
-            background-color: white;
-            color: black;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-            text-align: center;
-        }
+    .btn-link button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+
+    .btn-link button:hover {
+    background-color: #45a049;
+    }
+
+    body {
+    display: block;
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    background: #F0F0F0;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    }
+
+    body.dark-mode {
+    background: #202124;
+    }
+
+    body.dark-mode h1 {
+    color: white;
+    }
+
+    body.dark-mode h2 {
+    color: white;
+    }
+
+    body.dark-mode .custom-link {
+    color: #427AA1;
+    text-decoration: none;
+    }
+
+    body.dark-mode .custom-link:hover {
+    color: #0056b3;
+    }
+
+    body.dark-mode .header {
+    background-color: #303134;
+    }
+
+    body.dark-mode input {
+    color: black;
+    }
+
+    body.dark-mode label {
+    background-color: #303134;
+    }
+
+    body.dark-mode td {
+    color: white;
+    }
+
+    body.dark-mode th {
+    color: #F0F0F0;
+    }
+
+    button {
+    display: inline;
+    width: 10%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    background-color: #427AA1;
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    }
+
+    button:hover {
+    background-color: #0056b3; /* Color del botón al pasar el mouse */
+    }
+
+    .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    }
+
+    .content {
+    margin-top: 5rem; /* Asegura que el contenido no quede debajo del header */
+    padding: 0.5rem;
+    }
+
+    .form-group {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    }
+
+    .form-group p {
+    border: 0.1rem solid black; /* Aplica un borde visible */
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    font-size: 1rem;
+    text-align: center;
+    }
+
+    .form-group label {
+    color: #F0F0F0;
+    width: 10%;
+    text-align: center;
+    }
+
+    .form-group2 {
+    align-items: center;
+    display: inline-flex;
+    gap: 1.3rem;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    }
+
+    .form-group2 textarea {
+    border: 0.1rem solid black; /* Aplica un borde visible */
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    font-size: 0.5rem;
+    padding: 0.5rem;
+    width: 40rem;
+    }
 
 
-        h1 {
-            font-size: 3rem; /* Tamaño del texto del título */
-            text-align: left;
-    	    padding-left: 1rem;
-        }
-	h2 {
-            font-size: 1.5rem; /* Tamaño del texto del título */
-        }
+    h1 {
+    font-size: 3rem; /* Tamaño del texto del título */
+    text-align: left;
+    padding-left: 1rem;
+    }
 
+    h2 {
+    font-size: 1.5rem; /* Tamaño del texto del título */
+    }
 
-        .text {
-            padding-bottom: 2rem; /* Cambiado a rem para mejor adaptabilidad */
-            margin-left: 1rem;
-            width: 70rem; /* Cambiado a rem para mejor adaptabilidad */
-            max-width: 90%; /* Asegura que el contenedor no sea demasiado ancho en pantallas pequeñas */
-            box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
-            font-size: 1.2em;
-        }
+    label {
+    background-color: #427AA1;
+    border-radius: 0.5rem;
+    color: #F0F0F0;
+    cursor: pointer;
+    display: inline;
+    font-size: 1rem;
+    padding: 0.6rem;
+    }
 
-        .form-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            gap: 1.3rem;
-        }
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+    }
 
-        .form-group label {
-            width: 20%;
-            margin: 0 1rem 0 0;
-            color: white;
-        }
+    .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    }
 
-        .form-group input,
-        .form-group select {
-            flex-grow: 1;
-            padding: 0.5rem;
-            font-size: 1rem;
-            border-radius: 0.5rem;
-            border: none;
-        }
+    p {
+    border: 0.1rem solid black; /* Aplica un borde visible */
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    display: inline;
+    }
 
-        .form-group select {
-            width: 100%;
-        }
+    table {
+    width: 100%;
+    }
 
-        #mensaje {
-            margin-top: 1rem;
-        }
+    td {
+    border: none;
+    padding: 1rem;
+    text-align: center;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse; /* Asegura que no haya espacio entre celdas */
-        }
-
-        td {
-            padding: 10px;
-            text-align: center;
-            border: none; /* Elimina cualquier borde alrededor de las celdas */
-        }
-
-        button {
-            display: grid;
-            width: 10%;
-            padding: 1rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            border: none;
-            background-color: #427AA1;
-            color: white;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-	    font-family: 'Bebas Neue', sans-serif;
-        }
-
-        button:hover {
-            background-color: #0056b3; /* Color del botón al pasar el mouse */
-        }
-.table-container {
+    .table-container {
     width: 100%; /* Ajusta el ancho del contenedor */
-    max-width: 800px; /* Máximo ancho de la tabla */
     height: 20rem; /* Altura fija del contenedor */
     overflow: auto; /* Habilita la barra de desplazamiento si es necesario */
     border: 1px solid #ddd; /* Borde alrededor del contenedor */
     margin: 0 auto; /* Centra la tabla horizontalmente */
-}
+    }
 
-#topicosTable {
-    width: 100%; /* La tabla ocupa el ancho completo del contenedor */
-    border-collapse: collapse; /* Elimina los espacios entre las celdas */
-}
-.header {
+    .header {
     position: fixed;
     top: 0;
     left: 0;
@@ -178,15 +229,52 @@
     z-index: 1000; /* Asegura que el header esté por encima del contenido */
     font-size: 3rem;
     font-family: 'Bebas Neue', sans-serif;
-}
+    }
 
-.content {
-    margin-top: 5rem; /* Asegura que el contenido no quede debajo del header */
-    padding: 0.5rem;
+    #back-button {
+    background-color: red;
+    width: 20rem;
+    }
 
-}
+    #back-button:hover {
+    background-color: darkred;
+    }
 
+    #mensaje {
+    margin-top: 1rem;
+    }
+
+    #message {
+    padding: 1rem;
+    }
+
+    #message-text {
+    padding: 5rem;
+    max-width: 50rem;
+    word-wrap: break-word;
+    }
+
+    #solution-button {
+    padding: 2rem 5rem;
+    text-align: center;
+    width: 40%;
+    }
+
+    #topicosTable {
+    width: 100%; /* La tabla ocupa el ancho completo del contenedor */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+    }
+
+    .text {
+    padding-bottom: 2rem; /* Cambiado a rem para mejor adaptabilidad */
+    margin-left: 1rem;
+    width: 70rem; /* Cambiado a rem para mejor adaptabilidad */
+    max-width: 90%; /* Asegura que el contenedor no sea demasiado ancho en pantallas pequeñas */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+    font-size: 1.2rem;
+    }
     </style>
+
 
     <script th:inline="javascript">
         function showModal(modalId) {
@@ -208,18 +296,25 @@
     <h1>Detalles del topico</h1>
     <div class="text">
     <div class="form-group">
+
     <label>Titulo: </label><p th:text="${topico.titulo}"></p>
         <label>Autor: </label><p th:text="${topico.autor.nombre}"></p>
         <label>Fecha de creacion: </label><p th:text="${topico.fechaCreacion}"></p>
+
     </div>
-    <div class="form-group">
+
+
+        <div class="form-group">
         <label>Status: </label><p th:text="${topico.status}"></p>
         <label>Nombre del curso: </label><p th:text="${topico.curso.nombre}"></p>
     <label>Categoria del curso: </label><p th:text="${topico.curso.categoria}"></p>
     </div>
+
+
         <div class="form-group">
 
-        <label>Mensaje:</label><p th:text="${topico.mensaje}"></p>
+        <label>Mensaje:</label><p id="message-text" th:text="${topico.mensaje}"></p>
+
 </div>
     </div>
 </div>
@@ -233,8 +328,11 @@
         onclick="showModal('editModal')">
     Editar
 </button>
+<a th:href="@{/topicos(token=${token}, correoElectronico=${correoElectronico})}" class="btn-link">
+    <button id="back-button" type="button" >Regresar a todos los tópicos</button>
+</a>
 
-<a th:href="@{/topicos(token=${token}, correoElectronico=${correoElectronico})}">Regresar a todos los topicos</a>
+
 
 <div id="deleteModal" class="modal">
     <div class="modal-content">
@@ -281,16 +379,19 @@
     <form th:action="@{'topicos/' + ${topico.id} + '/respuestas?token=' + ${token} + '&correoElectronico=' + ${correoElectronico}}" method="post">
         <input type="hidden" name="topicoId" th:value="${topico.id}"/>
         <input type="hidden" name="autorCorreo" th:value="${correoElectronico}"/>
-        <label for="mensajeRespuesta">Mensaje:</label>
-        <textarea id="mensajeRespuesta" name="mensaje" required></textarea>
+        <div class="form-group2">
+        <label id="message" for="mensajeRespuesta">Mensaje:</label>
+        <textarea id="mensajeRespuesta" name="mensaje" required ></textarea>
+
         <button type="submit">Enviar</button>
+        </div>
     </form>
 </div>
 
 <!-- Sección para mostrar las respuestas -->
 <div>
     <h2>Comentarios</h2>
-    <table border="1" style="width:100%; border-collapse: collapse;">
+    <table border="1" id="topicosTable">
         <thead>
         <tr>
             <th>Autor</th>
@@ -307,7 +408,7 @@
             <td th:text="${respuesta.fechaCreacion}">Fecha de creación</td>
             <td th:text="${respuesta.isSolucion}">Solucion</td>
             <td th:if="${topico.status == 'active' and topico.autor.correoElectronico == correoElectronico}">
-                <button type="button" th:onclick="'marcarComoSolucion(' + ${respuesta.id} + ')'">Marcar como solución</button>
+                <button id="solution-button" type="button" th:onclick="'marcarComoSolucion(' + ${respuesta.id} + ')'">Marcar como solución</button>
             </td>
         </tr>
         </tbody>

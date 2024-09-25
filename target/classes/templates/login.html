@@ -6,7 +6,7 @@
     <style>
     body {
         align-items: center;
-        background: white;
+        background: #F0F0F0;
         display: flex;
         font-family: 'Bebas Neue', sans-serif;
         height: 100vh;
@@ -19,26 +19,28 @@
     }
 
     body.dark-mode h1 {
-        color: white;
+        color: #F0F0F0;
     }
 
     body.dark-mode h2 {
-        color: white;
+        color: #F0F0F0;
     }
 
     body.dark-mode label {
-        color: white;
+        color: #F0F0F0;
     }
 
     body.dark-mode .login {
         background-color: #303134;
+        border: 0.1rem solid #303134; /* Aplica un borde visible */
+        border-radius: 1rem;
     }
 
     button {
         background-color: #4381C1;
         border: none;
         border-radius: 0.5rem;
-        color: white;
+        color: #F0F0F0;
         cursor: pointer;
         display: grid;
         font-size: 1rem;
@@ -85,14 +87,23 @@
 
     .login {
         background-color: white;
-        border-radius: 1rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         font-size: 1.2em;
         max-width: 90%;
         padding: 3rem;
         width: 30rem;
+        border: 0.1rem solid #F0F0F0; /* Aplica un borde visible */
+        border-radius: 1rem;
     }
+    .login input {
+    border: 0.1rem solid black; /* Aplica un borde visible */
+    border-radius: 1rem;
+  }
+  body.dark-mode .login input {
+  border: 0.1rem solid white; /* Aplica un borde visible */
+    border-radius: 1rem;
+  }
 </style>
 
 </head>
