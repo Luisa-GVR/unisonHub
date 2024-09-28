@@ -10,7 +10,15 @@ import com.hub.foroUnison.domain.topico.TopicoRepository;
 import com.hub.foroUnison.domain.usuario.Usuario;
 import com.hub.foroUnison.domain.usuario.UsuarioRepository;
 import com.hub.foroUnison.infra.security.TokenService;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -66,6 +75,96 @@ public class TopicosController {
         return "redirect:/login";
     }
 
+
+    @GetMapping("/exportarPDF")
+    public void  exportarPDF(@RequestParam(name = "token", required = true) String token,
+                                    @RequestParam String correoElectronico,
+                                    HttpServletResponse response) throws IOException, DocumentException {
+
+        response.setContentType("application/pdf");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=topicos.pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<Object[]> resultados = topicoRepository.customQuery();
+
+        Document document = new Document();
+        PdfWriter.getInstance(document, response.getOutputStream());
+        document.open();
+
+        PdfPTable table = new PdfPTable(10);
+        table.setWidthPercentage(100);
+        table.setSpacingBefore(10f);
+        table.setSpacingAfter(10f);
+
+        // encabezados
+        table.addCell("Título del Tópico");
+        table.addCell("Mensaje del Tópico");
+        table.addCell("Fecha de Creación");
+        table.addCell("Estado del Tópico");
+        table.addCell("Nombre del Curso");
+        table.addCell("Categoría del Curso");
+        table.addCell("Mensaje de la Respuesta");
+        table.addCell("Fecha de Creación de la Respuesta");
+        table.addCell("Autor de la Respuesta");
+        table.addCell("Es Solución");
+
+        // llenar la tabla con los datos
+        for (Object[] row : resultados) {
+            for (Object column : row) {
+                table.addCell(column != null ? column.toString() : "");
+            }
+        }
+
+        document.add(table);
+        document.close();
+
+    }
+
+    @GetMapping("/exportarExcel")
+    public void  exportarExcel(@RequestParam(name = "token", required = true) String token,
+                                      @RequestParam String correoElectronico,
+                                      HttpServletResponse response) throws IOException {
+
+        System.out.println( "ok entre almenos supongo");
+
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=topicos.xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Object[]> resultados = topicoRepository.customQuery();
+
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Tópicos");
+
+        // encabezados
+        Row headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("Título del Tópico");
+        headerRow.createCell(1).setCellValue("Mensaje del Tópico");
+        headerRow.createCell(2).setCellValue("Fecha de Creación");
+        headerRow.createCell(3).setCellValue("Estado del Tópico");
+        headerRow.createCell(4).setCellValue("Nombre del Curso");
+        headerRow.createCell(5).setCellValue("Categoría del Curso");
+        headerRow.createCell(6).setCellValue("Mensaje de la Respuesta");
+        headerRow.createCell(7).setCellValue("Fecha de Creación de la Respuesta");
+        headerRow.createCell(8).setCellValue("Autor de la Respuesta");
+        headerRow.createCell(9).setCellValue("Es Solución");
+
+        // rellenar las filas con los datos
+        int rowNum = 1;
+        for (Object[] row : resultados) {
+            Row dataRow = sheet.createRow(rowNum++);
+            for (int i = 0; i < row.length; i++) {
+                dataRow.createCell(i).setCellValue(row[i] != null ? row[i].toString() : "");
+            }
+        }
+
+        workbook.write(response.getOutputStream());
+        workbook.close();
+
+
+    }
 
     //Todos los topicos
     @GetMapping

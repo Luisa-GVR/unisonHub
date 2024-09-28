@@ -260,6 +260,7 @@
 
                     </div>
                 </td>
+
             </tr>
             <tr>
 
@@ -299,6 +300,19 @@
 
             </tr>
         </table>
+
+        <tr>
+            <!-- Botones para exportar a PDF y Excel -->
+            <td colspan="7" style="text-align: center;">
+                <button type="button" class="btn btn-primary" th:onclick="|window.location='@{topicos/exportarExcel(token=${token}, correoElectronico=${correoElectronico})}'|">
+                    Exportar a Excel
+                </button>
+
+                <button type="button" class="btn btn-primary" th:onclick="|window.location='@{topicos/exportarPDF(token=${token}, correoElectronico=${correoElectronico})}'|">
+                    Exportar a PDF
+                </button>
+            </td>
+        </tr>
 
     </form>
 </div>
